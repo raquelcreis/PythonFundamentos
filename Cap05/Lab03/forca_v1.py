@@ -71,19 +71,29 @@ class Hangman:
 
 	# Método Construtor
 	def __init__(self, word):
-		
+		self.word = word
+		self.missed_letters = []
+		self.guessed_letters = []
 		
 	# Método para adivinhar a letra
 	def guess(self, letter):
-		
-		
+		if letter in self.word and letter not in self.guessed_letters:
+    		self.guessed_letters.append(letter)
+		elif letter not in self.word and letter not in self.missed_letters:
+			self.missed_letters.append(letter)
+		else:
+    		return True
+		return False
+			
 	# Método para verificar se o jogo terminou
 	def hangman_over(self):
-		
+		return self.hangman_won or len(self.missed_letters == 6)
 		
 	# Método para verificar se o jogador venceu
 	def hangman_won(self):
-		
+		if '_' not in self.hide_word:
+			return True
+		return False
 
 	# Método para não mostrar a letra no board
 	def hide_word(self):
